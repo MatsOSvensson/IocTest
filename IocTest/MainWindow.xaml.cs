@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Interfaces;
 using IocFactory;
+using Unity;
 
 namespace IocTest
 {
@@ -22,14 +23,18 @@ namespace IocTest
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        IUnityContainer container;
+
+        public MainWindow(IUnityContainer container)
         {
             InitializeComponent();
+            this.container = container;
         }
 
         private void QuotButtton_Click(object sender, RoutedEventArgs e)
         {
-            IQuotService service = Factory.GetQuotService();
+            IQuotFactory factory = container.Resolve<IQuotFactory>();
+            IQuotService service = factory.GetQuotService();
             QuotTextBlock.Text = service.GetQuot();
         }
     }

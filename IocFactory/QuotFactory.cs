@@ -11,26 +11,22 @@ namespace IocFactory
     /// <summary>
     /// 
     /// </summary>
-    public class Factory
+    public class QuotFactory : IQuotFactory
     {
-        public static IQuotService GetQuotService()
-        {
-            return QuotFactory.Create("EN");
-        }
-    }
+        readonly string language;
 
-    /// <summary>
-    /// 
-    /// </summary>
-    internal class QuotFactory
-    {
-        public static IQuotService Create(string lang)
+        public QuotFactory(string language)
         {
-            if (lang.Equals("EN"))
+            this.language = language;
+        }
+
+        public IQuotService GetQuotService()
+        {
+            if (language.Equals("EN"))
             {
                 return new QuoterEN();
             }
-            else if (lang.Equals("SE"))
+            else if (language.Equals("SE"))
             {
                 return new QuoterSE();
             }
