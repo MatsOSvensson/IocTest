@@ -15,7 +15,7 @@ namespace IocFactory
     {
         public static IQuotService GetQuotService()
         {
-            return QuotFactory.Create("EN");
+            return QuotFactory.Create("SE");
         }
     }
 
